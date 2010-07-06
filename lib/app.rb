@@ -31,6 +31,7 @@ configure do
   Wackamole.load_all_libs_relative_to(__FILE__, 'helpers' )
   Wackamole.load_all_libs_relative_to(__FILE__, 'controllers' )
   
+  config_path = default_config
   #Pick up command line args if any?  
   if defined? @@options and @@options
     if @@options[:protocol] == 'mongo'
@@ -41,6 +42,10 @@ configure do
       use Rack::Session::Memcache, 
         :memcache_server => "%s:%d" % [@@options[:host], @@options[:port]],
         :namespace       => @@options[:namespace]
+    end
+
+    if @@options[:config]
+      config_path = @@options[:config]
     end
   else
     # Default is local memcache on default port.
@@ -53,7 +58,7 @@ configure do
     #   :server => "%s:%d/%s/%s" % ['localhost', '27017', 'wackamole_ses', 'sessions'],
     #   :log_level => :error
   end  
-  Wackamole::Control.init_config( default_config )
+  Wackamole::Control.init_config(config_path)
 end
 
 # -----------------------------------------------------------------------------

@@ -14,6 +14,9 @@ Main {
     default 'production'
     description 'Specifies the env to run wackamole in'
   }
+  option( 'config', 'c' ) {
+    description 'Specifies location of zones.yml. default: ~/.wackamole/zones.yml'
+  }
   
   @@options = {}
     
@@ -22,6 +25,7 @@ Main {
     require File.expand_path( File.join(File.dirname(__FILE__), %w[.. lib wackamole]))
         
     @@options = parse_args( params[:pool].value )
+    @@options[:config] = params[:config].value if params[:config]
     ENV['RACK_ENV'] = params[:environment].value
     
     Thread.new do 
