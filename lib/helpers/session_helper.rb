@@ -3,7 +3,7 @@ module SessionHelper
     
     # Check credentials against config file
     def authenticate( creds )
-      config = YAML.load_file( default_config )
+      config = Wackamole::Control.config
       auth   = config['console_auth']
       
       # No auth. Let it go
@@ -15,7 +15,7 @@ module SessionHelper
     
     # Check if auth is defined
     def console_auth?
-      config = YAML.load_file( default_config )
+      config = Wackamole::Control.config
       config['console_auth']
     end
     
