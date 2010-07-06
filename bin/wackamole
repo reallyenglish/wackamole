@@ -15,6 +15,7 @@ Main {
     description 'Specifies the env to run wackamole in'
   }
   option( 'config', 'c' ) {
+    argument :required
     description 'Specifies location of zones.yml. default: ~/.wackamole/zones.yml'
   }
   
