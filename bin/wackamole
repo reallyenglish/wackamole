@@ -24,7 +24,7 @@ Main {
   def run
     require File.expand_path( File.join(File.dirname(__FILE__), %w[.. lib wackamole]))
         
-    @@options = parse_args( params[:pool].value )
+    @@options = parse_args( params[:pool].value ) || {}
     @@options[:config] = params[:config].value if params[:config]
     ENV['RACK_ENV'] = params[:environment].value
     
